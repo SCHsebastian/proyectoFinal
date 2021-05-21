@@ -100,34 +100,6 @@ public class Main {
 		
 		JMenuItem Errores = new JMenuItem("Informe de errores");
 		mnNewMenu.add(Errores);
-		
-		
-		//------- Conexión BBDD
-		
-		try {
-			Connection conecta=DriverManager.getConnection(
-					"jdbc:mysql://proyectofinalsch.mysql.database.azure.com:3306/final", "sebastian@proyectofinalsch", "Final123");
-			
-			String consulta = "SELECT nombre FROM final.usuario, final.administrador, final.empleado where id=?";
-			
-			PreparedStatement seleccionUsuarios = conecta.prepareStatement(consulta);
-			
-			seleccionUsuarios.setString(1, "idAdministrador");
-			seleccionUsuarios.setString(1, "idEmpleado");
-			
-			ResultSet resultado = seleccionUsuarios.executeQuery();
-			
-			while(resultado.next()) {
-				comboBox.addItem(resultado.getString(1));
-			}
-			
-			resultado.close();
-			
-			
-			
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+
 	}
 }
