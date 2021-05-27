@@ -7,6 +7,9 @@ import java.io.IOException;
 import javax.swing.JFrame;
 import java.awt.Dimension;
 import java.util.Locale;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class MuestraPantalla {
 	private JFrame frame;
@@ -47,6 +50,20 @@ public class MuestraPantalla {
 		frame.getContentPane().setLocale(new Locale("es", "ES"));
 		frame.getContentPane().setMinimumSize(new Dimension(1920, 1080));
 		frame.getContentPane().setLayout(null);
+		
+		JButton btnNewButton = new JButton("Productos");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					new EnsenyaProductos().setVisible(true);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				};
+			}
+		});
+		btnNewButton.setBounds(43, 90, 133, 70);
+		frame.getContentPane().add(btnNewButton);
 		frame.setBounds(100, 100, 496, 356);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
@@ -88,6 +105,4 @@ public class MuestraPantalla {
 		      
 		      }
 	}
-	
-
 }

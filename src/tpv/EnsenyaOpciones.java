@@ -1,7 +1,6 @@
 package tpv;
 
 import java.awt.BorderLayout;
-import tpv.EscribeProducto;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -17,7 +16,7 @@ import java.awt.event.ActionEvent;
 public class EnsenyaOpciones extends JFrame {
 
 	private JPanel contentPane;
-	private EscribeProducto anyade = new EscribeProducto();
+	private EjecucionProductos anyade = new EjecucionProductos();
 
 	/**
 	 * Launch the application.
@@ -47,25 +46,15 @@ public class EnsenyaOpciones extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JButton btnNewButton = new JButton("Añadir Producto");
+		btnNewButton.setBounds(10, 11, 109, 23);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Producto nuevo = new Producto("ejemplo",0.5,"ninguna.jpg");
-				try {
-					anyade.anyadirUnProducto(nuevo);
-					System.out.println("Producto añadido");
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					System.out.println("Ha habido un error al añadir el producto");
-				}
 				
 			}
 		});
+		contentPane.setLayout(null);
 		contentPane.add(btnNewButton);
 	}
-	
-
-
 }

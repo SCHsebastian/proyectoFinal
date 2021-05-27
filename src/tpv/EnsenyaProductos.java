@@ -2,6 +2,8 @@ package tpv;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.GridLayout;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -35,24 +37,19 @@ public class EnsenyaProductos extends JFrame {
 	 * @throws IOException 
 	 */
 	public EnsenyaProductos() throws IOException {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
+		contentPane.setLayout(new GridLayout(3, 3));
 		setContentPane(contentPane);
 		
-		JButton btnNewButton_1 = new JButton("New button");
-		contentPane.add(btnNewButton_1, BorderLayout.NORTH);
-		
-		ArrayList<Producto> leeBotones = LeeProductos.botones();
+		ArrayList<Producto> leeBotones = EjecucionProductos.botones();
 		for (Producto producto : leeBotones) {
-			JButton btnNewButton = new JButton("producto.getNombre();");
+			JButton btnNewButton = new JButton(producto.getNombre());
 			contentPane.add(btnNewButton);
 		}
 		
 		
 		
 	}
-
 }

@@ -4,7 +4,15 @@ import java.util.*;
 
 public class Factura {
 
-    public Factura() {
+    public Factura(ArrayList<Producto> productos, Descuento descuento, String cif) {
+    	this.productos=productos;
+    	this.descuento=descuento;
+    	this.cif=cif;
+    	for (Producto producto : productos) {
+    		double suma = producto.getPrecio();
+			total=total+suma;
+		}
+    	total=total*descuento.getCantidad();
     }
 
     private String cif;
@@ -13,10 +21,10 @@ public class Factura {
 
     private Descuento descuento;
 
-    private int total;
+    private double total;
 
     public void getFactura() {
-        // TODO implement here
+        
     }
 
 	public ArrayList<Producto> getProductos() {

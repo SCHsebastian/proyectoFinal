@@ -4,15 +4,22 @@ import java.util.*;
 
 public class Recibo {
 
-    public Recibo() {
+    public Recibo(ArrayList<Producto> productos, Descuento descuento) {
+    	this.productos=productos;
+    	this.descuento=descuento;
+    	for (Producto producto : productos) {
+    		double suma = producto.getPrecio();
+			total=total+suma;
+		}
+    	total=total*descuento.getCantidad();
     }
-
+    
 
     private ArrayList<Producto> productos;
 
     private Descuento descuento;
 
-    private int total;
+    private double total;
 
     public void getRecibo() {
         // TODO implement here

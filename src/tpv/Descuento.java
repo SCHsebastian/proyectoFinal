@@ -4,16 +4,19 @@ public class Descuento {
 
     private String nombre;
 
-    private int cantidad;
+    private double cantidad;
 
-    public void getNombre() {
-        
+    public String getNombre() {
+        return nombre;
     }
-    public void getCantidad() {
+    public double getCantidad() {
+    	return cantidad;
     }
 
 
-    public Descuento(String nombre, int cantidad) {
+    public Descuento(String nombre, double cantidad) {
+    	this.nombre=nombre;
+    	this.cantidad=cantidad;
     }
 
 }
