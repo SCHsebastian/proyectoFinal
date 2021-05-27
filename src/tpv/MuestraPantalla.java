@@ -7,11 +7,11 @@ import java.io.IOException;
 import javax.swing.JFrame;
 import java.awt.Dimension;
 import java.util.Locale;
-import javax.swing.JButton;
 
 public class MuestraPantalla {
 	private JFrame frame;
 	private static final String DIR_BASE = "Productos";
+	
 
 	/**
 	 * Launch the application.
@@ -69,6 +69,7 @@ public class MuestraPantalla {
 				}}
 		      else {
 		    	  System.out.println("Vamos a leer los productos");
+
 		      }
 		    } else {
 		      System.out.println("El directorio existe");
@@ -87,4 +88,6 @@ public class MuestraPantalla {
 		      
 		      }
 	}
+	
+
 }

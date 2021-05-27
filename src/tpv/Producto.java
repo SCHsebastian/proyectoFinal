@@ -1,14 +1,11 @@
 package tpv;
 
-public class Producto {
-
-    public Producto() {
-    }
-
+public class Producto { 
+    
   
     private String nombre;
 
-    private int precio;
+    private double precio;
 
     private String foto;
 
@@ -16,16 +13,23 @@ public class Producto {
         return nombre;
     }
 
-    public int getPrecio() {
+    public double getPrecio() {
         return precio;
     }
     
     public String getFoto() {
     	return foto;
     }
-
-    public Producto(String nombre, int precio, String foto) {
-        // TODO implement here
+    
+    public Producto(String nombre, double precio) {
+		this.nombre=nombre;
+		this.precio=precio;
+    }
+    
+    public Producto(String nombre, double precio, String foto) {
+    	this.nombre=nombre;
+    	this.precio=precio;
+    	this.foto=foto;
     }
 
 }
