@@ -6,9 +6,6 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.SwingConstants;
@@ -25,7 +22,6 @@ import java.awt.Insets;
 import java.awt.Window.Type;
 import java.awt.Color;
 import java.awt.Cursor;
-import java.awt.Dialog.ModalExclusionType;
 
 public class LaPantalla {
 
@@ -35,6 +31,7 @@ public class LaPantalla {
 	private final JList list = new JList();
 	private static String categoria;
 	private static String nombre;
+	private static ArrayList<Producto> paraFactRec = new ArrayList();
 	/**
 	 * Launch the application.
 	 */
@@ -92,22 +89,7 @@ public class LaPantalla {
 		
 		JButton ensenyaDescuentos = new JButton("Aplicar Descuento");
 		botoneraCarrito.add(ensenyaDescuentos);
-		ensenyaDescuentos.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try {
-					new EnesenyaDescuentos().setVisible(true);
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-		});
-		
 		JButton ensenyaTotal = new JButton("Total");
-		ensenyaTotal.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		botoneraCarrito.add(ensenyaTotal);
 		
 		JPanel botoneraOpcProductos = new JPanel();
@@ -128,6 +110,7 @@ public class LaPantalla {
 		botoneraOpcProductos.add(seleccionaCategoria, gbc_seleccionaCategoria);
 		
 		buscarProducto = new JTextField();
+		buscarProducto.setToolTipText("");
 		GridBagConstraints gbc_buscarProducto = new GridBagConstraints();
 		gbc_buscarProducto.fill = GridBagConstraints.BOTH;
 		gbc_buscarProducto.insets = new Insets(0, 0, 0, 5);
@@ -182,7 +165,7 @@ public class LaPantalla {
 				}
 		} catch (IOException o) {
 			o.printStackTrace();
-			JOptionPane.showMessageDialog(panel, "ERROR AL LEER LOS PRODUCTOS");;
+			JOptionPane.showMessageDialog(panel, "ERROR AL LEER LOS PRODUCTOS");
 		}
 	}
 
@@ -199,7 +182,7 @@ public class LaPantalla {
 			}
 		} catch (IOException o) {
 			o.printStackTrace();
-			JOptionPane.showMessageDialog(panel, "ERROR AL LEER LOS PRODUCTOS");;
+			JOptionPane.showMessageDialog(panel, "ERROR AL LEER LOS PRODUCTOS");
 		}
 		
 	}
@@ -212,11 +195,17 @@ public class LaPantalla {
 				if(producto.getTipo().equals(categ)) {
 					JButton btnNewButton = new JButton(producto.getNombre());
 					panel.add(btnNewButton);
+					btnNewButton.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							
+							list.updateUI();
+						}
+					});
 				}
 			}
 		} catch (IOException o) {
 			o.printStackTrace();
-			JOptionPane.showMessageDialog(panel, "ERROR AL LEER LOS PRODUCTOS");;
+			JOptionPane.showMessageDialog(panel, "ERROR AL LEER LOS PRODUCTOS");
 		}
 		
 	}
@@ -246,7 +235,7 @@ public class LaPantalla {
 			}
 		}
 			catch (Exception e) {
-				// TODO: handle exception
+				JOptionPane.showMessageDialog(panel, "ERROR AL LEER LOS PRODUCTOS");
 			}
 	}
 
