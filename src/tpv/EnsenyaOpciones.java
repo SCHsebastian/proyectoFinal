@@ -1,6 +1,7 @@
 package tpv;
 
 import java.awt.BorderLayout;
+import tpv.TodoDescuento;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -17,6 +18,7 @@ public class EnsenyaOpciones extends JFrame {
 
 	private JPanel contentPane;
 	private EjecucionProductos anyade = new EjecucionProductos();
+	private TodoDescuento incluye = new TodoDescuento();
 
 	/**
 	 * Launch the application.

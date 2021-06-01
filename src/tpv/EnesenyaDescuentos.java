@@ -11,7 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class EnsenyaProductos extends JFrame {
+public class EnesenyaDescuentos extends JFrame {
 
 	private JPanel contentPane;
 
@@ -22,7 +22,7 @@ public class EnsenyaProductos extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					EnsenyaProductos frame = new EnsenyaProductos();
+					EnesenyaDescuentos frame = new EnesenyaDescuentos();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -35,18 +35,18 @@ public class EnsenyaProductos extends JFrame {
 	 * Create the frame.
 	 * @throws IOException 
 	 */
-	public EnsenyaProductos() throws IOException {
+	public EnesenyaDescuentos() throws IOException {
+		setBounds(100, 100, 450, 300);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new GridLayout(3, 3));
 		setContentPane(contentPane);
-		
-		ArrayList<Producto> leeBotones = EjecucionProductos.botones();
-		for (Producto producto : leeBotones) {
-			JButton btnNewButton = new JButton(producto.getNombre());
+		ArrayList<Descuento> leeBotones = TodoDescuento.botonesDescuento();
+		for (Descuento descuento : leeBotones) {
+			JButton btnNewButton = new JButton(descuento.getNombre());
 			contentPane.add(btnNewButton);
-		}
-		
 	}
+
+}
 }

@@ -12,10 +12,11 @@ import java.util.ArrayList;
 public class EjecucionProductos {
 
 	public void anyadirUnProducto(Producto nuevo) throws IOException{  //Se añade un único producto.
-		FileOutputStream archivo=new FileOutputStream("Productos\\productos.txt",true);
+		FileOutputStream archivo=new FileOutputStream("Productos\\productos",true);
 	    DataOutputStream data = new DataOutputStream(archivo);
 	    data.writeUTF(nuevo.getNombre());
 	    data.writeDouble(nuevo.getPrecio());
+	    data.writeUTF(nuevo.getTipo());
 	    data.writeUTF(nuevo.getFoto());
 	    data.close();
 	}
@@ -24,15 +25,18 @@ public class EjecucionProductos {
 		String nom;
 		double pre;
 		String fot;
-		FileOutputStream archivo=new FileOutputStream("Productos\\productos.txt",true);
+		String tip;
+		FileOutputStream archivo=new FileOutputStream("Productos\\productos",true);
 	    try (DataOutputStream data = new DataOutputStream(archivo)) {
 			for (Producto producto : lista) {
 				nom = producto.getNombre();
 				pre = producto.getPrecio();
+				tip = producto.getTipo();
 				fot = producto.getFoto();
 				
 				data.writeUTF(nom);
 				data.writeDouble(pre);
+				data.writeUTF(tip);
 				data.writeUTF(fot);
 			}
 		}
@@ -40,13 +44,14 @@ public class EjecucionProductos {
 	
 	public static ArrayList<Producto> botones() throws IOException {	 // Se devuelve el array de productos para crear los botones necesarios.
 		ArrayList <Producto> implementar = new ArrayList <Producto>();
-		InputStream input = new FileInputStream("Productos\\productos.txt");  
+		InputStream input = new FileInputStream("Productos\\productos");  
 		try(DataInputStream dis=new DataInputStream(input)){
-	      while(true) {
+	      while(dis.available()<1) {
 	        String nombre = dis.readUTF();
 	        double precio = dis.readDouble();
+	        String cat = dis.readUTF();
 	        String foto = dis.readUTF();
-	        Producto leido = new Producto(nombre, precio, foto);
+	        Producto leido = new Producto(nombre, precio, cat, foto);
 	        implementar.add(leido);
 	      }
 	    } catch (EOFException eofe){
@@ -54,5 +59,4 @@ public class EjecucionProductos {
 	    }
 		return implementar;
 	  }
-
 }
