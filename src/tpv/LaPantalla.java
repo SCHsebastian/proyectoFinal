@@ -5,12 +5,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JPanel;
@@ -29,7 +33,8 @@ public class LaPantalla {
 	private static final String DIR_BASE = "Productos";
 	private JTextField buscarProducto;
 	private final JList list = new JList();
-	private static String categoria="uno";
+	private static String categoria;
+	private static String nombre;
 	/**
 	 * Launch the application.
 	 */
@@ -76,16 +81,6 @@ public class LaPantalla {
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setBounds(616, 11, 405, 48);
 		frmTerminalPuntoDe.getContentPane().add(lblNewLabel);
-		
-		EnsenyaProdByCat ensenyaProductos = new EnsenyaProdByCat(categoria);
-		ensenyaProductos.setBounds(469, 129, 715, 541);
-		frmTerminalPuntoDe.getContentPane().add(ensenyaProductos);
-		GridBagLayout gbl_ensenyaProductos = new GridBagLayout();
-		gbl_ensenyaProductos.columnWidths = new int[] {5};
-		gbl_ensenyaProductos.rowHeights = new int[]{0};
-		gbl_ensenyaProductos.columnWeights = new double[]{Double.MIN_VALUE};
-		gbl_ensenyaProductos.rowWeights = new double[]{Double.MIN_VALUE};
-		ensenyaProductos.setLayout(gbl_ensenyaProductos);
 		
 		JPanel botoneraCarrito = new JPanel();
 		botoneraCarrito.setBounds(10, 596, 449, 74);
@@ -149,20 +144,24 @@ public class LaPantalla {
 		gbc_buscar.gridx = 2;
 		gbc_buscar.gridy = 0;
 		botoneraOpcProductos.add(buscar, gbc_buscar);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(479, 129, 680, 541);
+		frmTerminalPuntoDe.getContentPane().add(panel);
+		panel.setLayout(new GridLayout(0, 5, 0, 0));
+		
 		buscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				categoria=buscarProducto.getText();
-				ensenyaProductos.updateUI();
+				panel.removeAll();
+				buscaProducto(panel);
+				panel.updateUI();
 			}
 		});
 		seleccionaCategoria.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-					new EnsenyaProductos().setVisible(true);
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				};
+				panel.removeAll();
+				selectCategoria(panel);
+				panel.updateUI();
 			}
 		});
 		borraSeleccionados.addActionListener(new ActionListener() {
@@ -173,6 +172,84 @@ public class LaPantalla {
 	}
 	
 	
+	protected void ensenyaProductos(JPanel panel) {
+		ArrayList<Producto> leeBotones;
+		try {
+			leeBotones = EjecucionProductos.botones();
+			for (Producto producto : leeBotones) {
+					JButton btnNewButton = new JButton(producto.getTipo());
+					panel.add(btnNewButton);
+				}
+		} catch (IOException o) {
+			o.printStackTrace();
+			JOptionPane.showMessageDialog(panel, "ERROR AL LEER LOS PRODUCTOS");;
+		}
+	}
+
+	protected void buscaProducto(JPanel panel) {
+		nombre=buscarProducto.getText();
+		ArrayList<Producto> leeBotones;
+		try {
+			leeBotones = EjecucionProductos.botones();
+			for (Producto producto : leeBotones) {
+				if(producto.getNombre().equals(nombre)) {
+					JButton btnNewButton = new JButton(producto.getNombre());
+					panel.add(btnNewButton);
+				}
+			}
+		} catch (IOException o) {
+			o.printStackTrace();
+			JOptionPane.showMessageDialog(panel, "ERROR AL LEER LOS PRODUCTOS");;
+		}
+		
+	}
+	
+	protected void buscaCategoria(JPanel panel, String categ) {
+		ArrayList<Producto> leeBotones;
+		try {
+			leeBotones = EjecucionProductos.botones();
+			for (Producto producto : leeBotones) {
+				if(producto.getTipo().equals(categ)) {
+					JButton btnNewButton = new JButton(producto.getNombre());
+					panel.add(btnNewButton);
+				}
+			}
+		} catch (IOException o) {
+			o.printStackTrace();
+			JOptionPane.showMessageDialog(panel, "ERROR AL LEER LOS PRODUCTOS");;
+		}
+		
+	}
+	
+	protected void selectCategoria(JPanel panel) {
+		ArrayList<String> categorias = new ArrayList<>();
+		ArrayList<Producto> leeBotones;
+		try {
+			leeBotones = EjecucionProductos.botones();
+			for (Producto producto : leeBotones) {
+				if(!categorias.contains(producto.getTipo())) {
+					categorias.add(producto.getTipo());
+				}
+			}
+			for (String cat : categorias) {
+				JButton btnNewButton = new JButton(cat);
+				panel.add(btnNewButton);
+				
+				btnNewButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						panel.removeAll();
+						buscaCategoria(panel, cat);
+						panel.updateUI();
+					}
+				});
+				
+			}
+		}
+			catch (Exception e) {
+				// TODO: handle exception
+			}
+	}
+
 	private static void iniciar(){
 		File directorio = new File(DIR_BASE);
 		File nuevoFichero=new File(directorio,"productos");

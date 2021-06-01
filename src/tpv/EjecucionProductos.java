@@ -46,7 +46,7 @@ public class EjecucionProductos {
 		ArrayList <Producto> implementar = new ArrayList <Producto>();
 		InputStream input = new FileInputStream("Productos\\productos");  
 		try(DataInputStream dis=new DataInputStream(input)){
-	      while(dis.available()<1) {
+	      while(dis.available()>1) {
 	        String nombre = dis.readUTF();
 	        double precio = dis.readDouble();
 	        String cat = dis.readUTF();
