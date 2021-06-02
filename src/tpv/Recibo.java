@@ -11,19 +11,30 @@ public class Recibo {
     		double suma = producto.getPrecio();
 			total=total+suma;
 		}
-    	total=total*descuento.getCantidad();
+    	total=total-descuento.getCantidad();
     }
     
+    public Recibo(ArrayList<Producto> productos) {
+    	this.productos=productos;
+    	for (Producto producto : productos) {
+    		double suma = producto.getPrecio();
+			total=total+suma;
+		}
+    }
 
     private ArrayList<Producto> productos;
 
     private Descuento descuento;
 
     private double total;
-
-    public void getRecibo() {
-        // TODO implement here
+    
+    public Descuento getDescuento() {
+    	return descuento;
     }
+
+	public double getTotal() {
+		return total;
+	}
 
 	public ArrayList<Producto> getProductos() {
 		return productos;

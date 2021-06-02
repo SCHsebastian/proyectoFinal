@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-public class EjecucionProductos {
+public class TodoProductos {
 
 	public void anyadirUnProducto(Producto nuevo) throws IOException{  //Se añade un único producto.
 		FileOutputStream archivo=new FileOutputStream("Productos\\productos",true);

@@ -1,6 +1,5 @@
 package tpv;
 
-
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.EOFException;
@@ -10,7 +9,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-public class TodoDescuento {
+
+public class TodoDescuento{
 
 		public void anyadirUnDescuento(Descuento nuevo) throws IOException{  //Se añade un único descuento.
 			FileOutputStream archivo=new FileOutputStream("Productos\\descuentos",true);
@@ -36,5 +36,6 @@ public class TodoDescuento {
 		    }
 			return implementar;
 		  }
-
 }
+		
+		

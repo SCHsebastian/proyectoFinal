@@ -12,7 +12,18 @@ public class Factura {
     		double suma = producto.getPrecio();
 			total+=suma;
 		}
-    	total=total*descuento.getCantidad();
+    	total=total-descuento.getCantidad();
+    	numeroFactura=facturasCreadas;
+    	facturasCreadas++;
+    }
+    
+    public Factura(ArrayList<Producto> productos, String cif) {
+    	this.productos=productos;
+    	this.cif=cif;
+    	for (Producto producto : productos) {
+    		double suma = producto.getPrecio();
+			total+=suma;
+		}
     	numeroFactura=facturasCreadas;
     	facturasCreadas++;
     }
@@ -24,8 +35,8 @@ public class Factura {
     private double total;
 	private static int facturasCreadas;
 
-    public void getFactura() {
-        
+    public Descuento getDescuento() {
+    	return descuento;
     }
 
     public double getTotal() {
