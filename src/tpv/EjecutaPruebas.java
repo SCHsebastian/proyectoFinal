@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -20,6 +21,11 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 
 public class EjecutaPruebas {
+	
+	
+	public static void main(String[] args) {
+		System.out.println("");
+	}
 	
 	/*
 	public static void main(String[] args) {

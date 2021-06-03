@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class TodoProductos {
 
-	public void anyadirUnProducto(Producto nuevo) throws IOException{  //Se añade un único producto.
+	public static void anyadirUnProducto(Producto nuevo) throws IOException{  //Se añade un único producto.
 		FileOutputStream archivo=new FileOutputStream("Productos\\productos",true);
 	    DataOutputStream data = new DataOutputStream(archivo);
 	    data.writeUTF(nuevo.getNombre());

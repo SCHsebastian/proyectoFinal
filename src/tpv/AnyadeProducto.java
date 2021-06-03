@@ -7,20 +7,16 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.JTable;
 import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-import javax.swing.BoxLayout;
 import java.awt.GridLayout;
-import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.SwingConstants;
 
 public class AnyadeProducto extends JFrame {
@@ -29,6 +25,7 @@ public class AnyadeProducto extends JFrame {
 	private JTextField nombre;
 	private JTextField precio;
 	private JTextField tipo;
+	private String urlFoto;
 
 	/**
 	 * Launch the application.
@@ -50,6 +47,7 @@ public class AnyadeProducto extends JFrame {
 	 * Create the frame.
 	 */
 	public AnyadeProducto() {
+		urlFoto = "";
 		setTitle("A\u00F1adir un producto");
 		setResizable(false);
 		setBounds(100, 100, 640, 326);
@@ -113,7 +111,8 @@ public class AnyadeProducto extends JFrame {
 				
 				if (respuesta == JFileChooser.APPROVE_OPTION) {
 					File fotito = new File(fileChooser.getSelectedFile().getAbsolutePath());
-					fotito.getAbsoluteFile();
+					urlFoto = fotito.getAbsolutePath();
+					
 				}
 			}
 		});
@@ -124,6 +123,14 @@ public class AnyadeProducto extends JFrame {
 		panel.setLayout(new GridLayout(1, 0, 0, 0));
 		
 		JButton borrar = new JButton("Borrar");
+		borrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				nombre.setText(null);
+				precio.setText(null);
+				tipo.setText(null);
+				urlFoto=null;
+			}
+		});
 		panel.add(borrar);
 		
 		JButton botonAnyadeProducto = new JButton("A\u00F1adir");
@@ -140,7 +147,13 @@ public class AnyadeProducto extends JFrame {
 		
 		botonAnyadeProducto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				try {
+					TodoProductos.anyadirUnProducto(new Producto(nombre.getText(),Double.parseDouble(precio.getText()), tipo.getText(), urlFoto));
+					JOptionPane.showMessageDialog(botonAnyadeProducto, "El producto ha sido añadido con éxito.");
+				} catch (NumberFormatException | IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 	}

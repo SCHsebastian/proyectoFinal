@@ -13,7 +13,6 @@ public class Descuento {
     	return cantidad;
     }
 
-
     public Descuento(String nombre, double cantidad) {
     	this.nombre=nombre;
     	this.cantidad=cantidad;

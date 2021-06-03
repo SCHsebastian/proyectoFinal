@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class TodoDescuento{
 
-		public void anyadirUnDescuento(Descuento nuevo) throws IOException{  //Se añade un único descuento.
+		public static void anyadirUnDescuento(Descuento nuevo) throws IOException{  //Se añade un único descuento.
 			FileOutputStream archivo=new FileOutputStream("Productos\\descuentos",true);
 		    DataOutputStream data = new DataOutputStream(archivo);
 		    data.writeUTF(nuevo.getNombre());

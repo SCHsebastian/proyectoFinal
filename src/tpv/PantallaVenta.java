@@ -32,8 +32,8 @@ public class PantallaVenta{
 
 	private JFrame frmTerminalPuntoDe;
 	private JTextField buscarProducto;
-	private static ArrayList<Producto> paraFactRec= new ArrayList<>();
-	public static Descuento paDescontar;
+	private ArrayList<Producto> paraFactRec;
+	public static Descuento paDescontar;  //No sé como quitar este Static
 	/**
 	 * Launch the application.
 	 */
@@ -62,6 +62,7 @@ public class PantallaVenta{
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		paraFactRec= new ArrayList<>();
 		
 		//INICIALIZAMOS LA PANTALLA DE VENTAS
 		frmTerminalPuntoDe = new JFrame();
@@ -251,8 +252,8 @@ public class PantallaVenta{
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					JOptionPane.showMessageDialog(cesta, "Recuerda que antes has de presionar TOTAL");
-					cesta.setText("El total con descuento incluido es: "+ (Double.parseDouble(cesta.getText())*d.getCantidad()));
-					PantallaVenta.paDescontar = d;
+					cesta.setText("El total con descuento incluido es: "+ (Double.parseDouble(cesta.getText())-d.getCantidad()));
+					paDescontar = d;
 				}
 			});}
 			
