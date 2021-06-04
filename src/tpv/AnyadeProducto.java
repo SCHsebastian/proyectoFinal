@@ -1,4 +1,4 @@
-	package tpv;
+package tpv;
 
 import java.awt.EventQueue;
 

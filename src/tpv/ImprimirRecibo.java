@@ -2,6 +2,8 @@ package tpv;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.io.File;
+
 import javax.swing.JTextPane;
 
 public class ImprimirRecibo {
@@ -16,7 +18,7 @@ public class ImprimirRecibo {
 			}
 			if (recibo.getDescuento() != null) {
 				jtp.setText(jtp.getText()+recibo.getDescuento().getNombre());
-				jtp.setText(jtp.getText()+"\n\n Descuenta "+recibo.getDescuento().getCantidad()+"€");
+				jtp.setText(jtp.getText()+"\n\n"+"Descuenta "+recibo.getDescuento().getCantidad()+"€");
 			}
 			jtp.setText(jtp.getText()+"\n\n"+"TOTAL" +"		"+recibo.getTotal()+"€");
 	      boolean show = true;
@@ -26,4 +28,13 @@ public class ImprimirRecibo {
 	        ex.printStackTrace();
 	      }
 	    }
+
+	public static void numeroDeRecibos(File directorioRecibos) {
+			int cantidad=0;
+			for (File recibos: directorioRecibos.listFiles()) {
+				cantidad++;
+			}
+			Recibo.setRecibosCreados(cantidad);
+		}
+		
 }

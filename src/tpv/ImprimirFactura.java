@@ -1,5 +1,6 @@
 package tpv;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import com.itextpdf.text.BaseColor;
@@ -19,7 +20,7 @@ public class ImprimirFactura {
 		Document documento = new Document();
 
 		//El OutPutStream para el fichero donde crearemos el PDF
-		FileOutputStream ficheroPDF = new FileOutputStream("Factura"+factura.getNumeroFactura()+".pdf");
+		FileOutputStream ficheroPDF = new FileOutputStream("Facturas\\Factura"+factura.getNumeroFactura()+"fecha"+Main.fecha.getDate()+"-"+Main.fecha.getMonth()+".pdf");
 
 		//Se asocia el documento de OutputStream
 		PdfWriter.getInstance(documento, ficheroPDF);
@@ -61,6 +62,14 @@ public class ImprimirFactura {
 
 		//Cerramos el documento
 		documento.close();
+	}
+	
+	public static void numeroDeFacturas(File facturasTotales) {
+		int cantidad=0;
+		for (File factura: facturasTotales.listFiles()) {
+			cantidad++;
+		}
+		Factura.setFacturasCreadas(cantidad);
 	}
 	
 }

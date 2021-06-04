@@ -12,6 +12,7 @@ public class Recibo {
 			total=total+suma;
 		}
     	total=total-descuento.getCantidad();
+    	recibosCreados++;
     }
     
     public Recibo(ArrayList<Producto> productos) {
@@ -20,10 +21,11 @@ public class Recibo {
     		double suma = producto.getPrecio();
 			total=total+suma;
 		}
+    	recibosCreados++;
     }
 
     private ArrayList<Producto> productos;
-
+    private static int recibosCreados;
     private Descuento descuento;
 
     private double total;
@@ -42,6 +44,10 @@ public class Recibo {
 
 	public void setProductos(ArrayList<Producto> productos) {
 		this.productos = productos;
+	}
+
+	public static void setRecibosCreados(int cantidad) {
+		recibosCreados=cantidad;
 	}
 
 }

@@ -35,7 +35,15 @@ public class Factura {
     private double total;
 	private static int facturasCreadas;
 
-    public Descuento getDescuento() {
+    public static int getFacturasCreadas() {
+		return facturasCreadas;
+	}
+
+	public static void setFacturasCreadas(int facturasCreadas) {
+		Factura.facturasCreadas = facturasCreadas;
+	}
+
+	public Descuento getDescuento() {
     	return descuento;
     }
 
@@ -58,5 +66,6 @@ public class Factura {
 	 public String getCif() {
 			return cif;
 		}
-
+	 
+	 
 }

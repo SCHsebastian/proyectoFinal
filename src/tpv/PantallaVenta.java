@@ -3,10 +3,11 @@ package tpv;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.SwingConstants;
@@ -23,14 +24,13 @@ import java.awt.GridLayout;
 import java.awt.HeadlessException;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import java.awt.Window.Type;
 import java.awt.Color;
 import java.awt.Cursor;
 import javax.swing.JTextArea;
 
 public class PantallaVenta{
 
-	private JFrame frmTerminalPuntoDe;
+	JFrame frmTerminalPuntoDe;
 	private JTextField buscarProducto;
 	private ArrayList<Producto> paraFactRec;
 	public static Descuento paDescontar;  //No sé como quitar este Static
@@ -54,14 +54,13 @@ public class PantallaVenta{
 	 * Create the application.
 	 */
 	public PantallaVenta() {
-		initialize();
-		iniciar();
+		ejecutar();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void ejecutar() {
 		paraFactRec= new ArrayList<>();
 		
 		//INICIALIZAMOS LA PANTALLA DE VENTAS
@@ -71,7 +70,6 @@ public class PantallaVenta{
 		frmTerminalPuntoDe.setFont(new Font("Dubai Medium", Font.BOLD, 16));
 		frmTerminalPuntoDe.setForeground(Color.BLUE);
 		frmTerminalPuntoDe.setTitle("TERMINAL PUNTO DE VENTA");
-		frmTerminalPuntoDe.setType(Type.UTILITY);
 		frmTerminalPuntoDe.setResizable(false);
 		frmTerminalPuntoDe.setBounds(100, 100, 1200, 720);
 		frmTerminalPuntoDe.getContentPane().setLayout(null);
@@ -168,6 +166,7 @@ public class PantallaVenta{
 		frmTerminalPuntoDe.getContentPane().add(schSumiComputer);
 		frmTerminalPuntoDe.getContentPane().add(cesta);
 		
+		//ACTION LISTENERS DE LOS BOTONES
 		
 		recibo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -177,8 +176,7 @@ public class PantallaVenta{
 					ImprimirRecibo.imprimirTicket(new Recibo(paraFactRec, paDescontar));
 				}
 			}
-		});
-		
+		});	
 		ensenyaDescuentos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -188,14 +186,12 @@ public class PantallaVenta{
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
-			}});
-		
+			}});	
 		ensenyaTotal.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				total(cesta);
 			}
-		});
-		
+		});	
 		buscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				panel.removeAll();
@@ -216,7 +212,6 @@ public class PantallaVenta{
 				cesta.setText(null);
 			}
 		});
-
 		facturar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -284,7 +279,8 @@ public class PantallaVenta{
 			leeBotones = TodoProductos.botones();
 			for (Producto producto : leeBotones) {
 				if(producto.getTipo().equals(categ)) {
-					JButton btnNewButton = new JButton(producto.getNombre());
+					ImageIcon water = new ImageIcon(producto.getFoto());
+					JButton btnNewButton = new JButton(producto.getNombre(), water);
 					panel.add(btnNewButton);
 					btnNewButton.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
@@ -328,46 +324,5 @@ public class PantallaVenta{
 			catch (Exception e) {
 				JOptionPane.showMessageDialog(panel, "ERROR AL LEER LOS PRODUCTOS");
 			}
-	}
-
-	protected static void iniciar(){
-		String DIR_BASE = "Productos";
-		File directorio = new File(DIR_BASE);
-		File nuevoFichero=new File(directorio,"productos");
-		File nuevoFichero2=new File(directorio,"descuentos");
-		if(!directorio.exists()){
-		      System.out.println("El directorio no existe");
-		      System.out.println("Lo creamos");
-		      System.out.println(directorio.mkdir());
-		      System.out.println("Vamos a crear un nuevo fichero");
-		      if(!nuevoFichero.exists() && !nuevoFichero2.exists()) {
-		    	  System.out.println("Vamos a crear un nuevo archivo");
-		    	  try {
-					nuevoFichero.createNewFile();
-					nuevoFichero2.createNewFile();
-				} catch (IOException e) {
-			        System.out.println("OYE, al crear Ha habido un problema");
-					e.printStackTrace();
-				}}
-		      else {
-		    	  System.out.println("Vamos a leer los productos");
-
-		      }
-		    } else {
-		      System.out.println("El directorio existe");
-		      if(!nuevoFichero.exists()) {
-		    	  System.out.println("Vamos a crear un nuevo archivo");
-					try {
-						nuevoFichero.createNewFile();
-					} catch (IOException e) {
-				        System.out.println("OYE, al crear Ha habido un problema");
-						e.printStackTrace();
-					}
-		      }
-		      else {
-		    	  System.out.println("Vamos a leer los productos");
-		      }
-		      
-		      }
 	}
 }

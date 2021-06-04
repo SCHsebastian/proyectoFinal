@@ -41,7 +41,6 @@ public class AnyadeDescuento extends JFrame {
 	 * Create the frame.
 	 */
 	public AnyadeDescuento() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 525, 277);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
